@@ -41,7 +41,7 @@ void loop() {
   int high_byte = message[2];
   int low_byte = message[3];
   int value = high_byte * 256 + low_byte;
-  Serial.print("co2=")
+  Serial.print("co2=");
   Serial.println(value, DEC);
 
   delay(900);
