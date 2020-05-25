@@ -1,7 +1,8 @@
 #include <SoftwareSerial.h>
 
 //SoftwareSerial mySerial(14, 15); // RX, TX for WNPink
-SoftwareSerial mySerial(16, 10); // RX, TX for ProMicro
+//SoftwareSerial mySerial(16, 10); // RX, TX for ProMicro
+SoftwareSerial mySerial(6, 5); // RX, TX for Seeduino XIAO
 
 void setup() {
   Serial.begin(9600);
