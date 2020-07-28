@@ -24,7 +24,7 @@ int usb_mhz14a_get_co2(){
   };
   mySerial.write(command, sizeof(command));
 
-  delay(100);
+  delay(10);
 
   int c = 0;
   int message[9];
