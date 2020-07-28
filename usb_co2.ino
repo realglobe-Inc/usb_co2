@@ -3,6 +3,7 @@ void setup() {
   while (!Serial) {
     ; // wait for serial port to connect
   }
+  usb_mhz14a_init();
 }
 
 void loop() {
