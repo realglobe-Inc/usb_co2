@@ -16,8 +16,22 @@ static byte command_get_co2[] = {
   0x79   // Byte 9
 };
 
+static byte command_abc_off[] = {
+  0xFF,  // Byte 0
+  0x01,  // Byte 1
+  0x79,  // Byte 2
+  0x00,  // Byte 4
+  0x00,  // Byte 5
+  0x00,  // Byte 6
+  0x00,  // Byte 7
+  0x00,  // Byte 8
+  0x86   // Byte 9
+};
+
 void usb_mhz14a_init(){
   mySerial.begin(9600);
+  delay(10);
+  usb_mhz14a_abc_off();
 }
 
 int usb_mhz14a_get_co2(){
@@ -41,4 +55,10 @@ int usb_mhz14a_get_co2(){
   int value = high_byte * 256 + low_byte;
 
   return value;
+}
+
+void usb_mhz14a_abc_off(){
+  mySerial.write(command_abc_off, sizeof(command_abc_off));
+
+  delay(10);
 }
