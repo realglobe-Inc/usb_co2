@@ -4,25 +4,24 @@
 //SoftwareSerial mySerial(16, 10); // RX, TX for ProMicro
 SoftwareSerial mySerial(6, 5); // RX, TX for Seeduino XIAO
 
-
+static byte command_get_co2[] = {
+  0xFF,  // Byte 0
+  0x01,  // Byte 1
+  0x86,  // Byte 2
+  0x00,  // Byte 4
+  0x00,  // Byte 5
+  0x00,  // Byte 6
+  0x00,  // Byte 7
+  0x00,  // Byte 8
+  0x79   // Byte 9
+};
 
 void usb_mhz14a_init(){
   mySerial.begin(9600);
 }
 
 int usb_mhz14a_get_co2(){
-  byte command[] = {
-    0xFF,  // Byte 0
-    0x01,  // Byte 1
-    0x86,  // Byte 2
-    0x00,  // Byte 4
-    0x00,  // Byte 5
-    0x00,  // Byte 6
-    0x00,  // Byte 7
-    0x00,  // Byte 8
-    0x79   // Byte 9
-  };
-  mySerial.write(command, sizeof(command));
+  mySerial.write(command_get_co2, sizeof(command_get_co2));
 
   delay(10);
 
