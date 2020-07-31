@@ -1,5 +1,7 @@
 #include <SoftwareSerial.h>
 
+#define CALIB_TIME 30 // per min
+
 //SoftwareSerial mySerial(14, 15); // RX, TX for WNPink
 //SoftwareSerial mySerial(16, 10); // RX, TX for ProMicro
 SoftwareSerial mySerial(6, 5); // RX, TX for Seeduino XIAO
@@ -44,6 +46,7 @@ void usb_mhz14a_init(){
   mySerial.begin(9600);
   delay(10);
   usb_mhz14a_abc_off();
+  delay(10);
 }
 
 int usb_mhz14a_get_co2(){
@@ -76,6 +79,13 @@ void usb_mhz14a_abc_off(){
 }
 
 void usb_mhz14a_zero_calibration(){
+  int cnt = 0;
+
+  for( cnt = 0; cnt < ( CALIB_TIME * 60 ); cnt++){
+    usb_mhz14a_get_co2();
+    delay(1000);
+  }
+
   mySerial.write(command_zero_calibration, sizeof(command_zero_calibration));
 
   delay(10);
