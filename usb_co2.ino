@@ -1,49 +1,39 @@
-#include <SoftwareSerial.h>
-
-//SoftwareSerial mySerial(14, 15); // RX, TX for WNPink
-//SoftwareSerial mySerial(16, 10); // RX, TX for ProMicro
-SoftwareSerial mySerial(6, 5); // RX, TX for Seeduino XIAO
+#define PIN_LED_RED 0
+#define PIN_LED_GREEN 1
+#define LED_ON LOW
+#define LED_OFF HIGH
+#define PIN_SW1 3
+#define PIN_SW2 2
 
 void setup() {
+  digitalWrite(PIN_LED_RED, LED_OFF);
+  digitalWrite(PIN_LED_GREEN, LED_OFF);
+  pinMode(PIN_LED_RED, OUTPUT);
+  pinMode(PIN_LED_GREEN, OUTPUT);
+  pinMode(PIN_SW1, INPUT);
+  pinMode(PIN_SW2, INPUT);
+
+  usb_mhz14a_init();
+  if( digitalRead( PIN_SW1 ) ){
+    digitalWrite(PIN_LED_RED, LED_ON);
+    usb_mhz14a_zero_calibration();
+    digitalWrite(PIN_LED_RED, LED_OFF);
+  }
+  digitalWrite(PIN_LED_GREEN, LED_ON);
+
   Serial.begin(9600);
   while (!Serial) {
     ; // wait for serial port to connect
   }
-  mySerial.begin(9600);
 }
 
 void loop() {
-  byte command[] = {
-    0xFF,  // Byte 0
-    0x01,  // Byte 1
-    0x86,  // Byte 2
-    0x00,  // Byte 4
-    0x00,  // Byte 5
-    0x00,  // Byte 6
-    0x00,  // Byte 7
-    0x00,  // Byte 8
-    0x79   // Byte 9
-  };
-  mySerial.write(command, sizeof(command));
+  int value = 0;
 
-  delay(100);
+  value = usb_mhz14a_get_co2();
 
-  int c = 0;
-  int message[9];
-
-  while (mySerial.available()) {
-    int b = mySerial.read();
-    if ((c == 0 && b == 0xFF) || (c >= 1 && c <= 8)) {
-      message[c] = b;
-      c++;
-    }
-  }
-
-  int high_byte = message[2];
-  int low_byte = message[3];
-  int value = high_byte * 256 + low_byte;
   Serial.print("co2=");
   Serial.println(value, DEC);
 
-  delay(900);
+  delay(1000);
 }
