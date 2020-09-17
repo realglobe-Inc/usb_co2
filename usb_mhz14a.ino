@@ -57,7 +57,7 @@ static byte command_zero_calibration[] = {
 void usb_mhz14a_init(){
   mySerial.begin(9600);
   delay(10);
-  usb_mhz14a_abc_off();
+  usb_mhz14a_abc_on();
   delay(10);
 }
 
