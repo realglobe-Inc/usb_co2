@@ -9,6 +9,11 @@ void setup() {
   pinMode(PIN_SW1, INPUT);
   pinMode(PIN_SW2, INPUT);
 
+  Serial.begin(9600);
+  while (!Serial) {
+    ; // wait for serial port to connect
+  }
+
   usb_mhz14a_init();
 /*
   if( digitalRead( PIN_SW1 ) ){
@@ -18,11 +23,6 @@ void setup() {
   }
 */
   digitalWrite(LED_BUILTIN, LED_ON);
-
-  Serial.begin(9600);
-  while (!Serial) {
-    ; // wait for serial port to connect
-  }
 }
 
 void loop() {
