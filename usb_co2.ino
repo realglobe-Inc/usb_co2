@@ -14,11 +14,13 @@ void setup() {
   pinMode(PIN_SW2, INPUT);
 
   usb_mhz14a_init();
+/*
   if( digitalRead( PIN_SW1 ) ){
     digitalWrite(PIN_LED_RED, LED_ON);
     usb_mhz14a_zero_calibration();
     digitalWrite(PIN_LED_RED, LED_OFF);
   }
+*/
   digitalWrite(PIN_LED_GREEN, LED_ON);
 
   Serial.begin(9600);
