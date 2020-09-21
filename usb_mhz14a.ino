@@ -30,6 +30,18 @@ static byte command_abc_off[] = {
   0x86   // Byte 9
 };
 
+static byte command_abc_on[] = {
+  0xFF,  // Byte 0
+  0x01,  // Byte 1
+  0x79,  // Byte 2
+  0xA0,  // Byte 4
+  0x00,  // Byte 5
+  0x00,  // Byte 6
+  0x00,  // Byte 7
+  0x00,  // Byte 8
+  0xE6   // Byte 9
+};
+
 static byte command_zero_calibration[] = {
   0xFF,  // Byte 0
   0x01,  // Byte 1
@@ -45,7 +57,7 @@ static byte command_zero_calibration[] = {
 void usb_mhz14a_init(){
   mySerial.begin(9600);
   delay(10);
-  usb_mhz14a_abc_off();
+  usb_mhz14a_abc_on();
   delay(10);
 }
 
@@ -73,6 +85,12 @@ int usb_mhz14a_get_co2(){
 }
 
 void usb_mhz14a_abc_off(){
+  mySerial.write(command_abc_off, sizeof(command_abc_off));
+
+  delay(10);
+}
+
+void usb_mhz14a_abc_on(){
   mySerial.write(command_abc_off, sizeof(command_abc_off));
 
   delay(10);
