@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name kicad_usb_co2-rescue)(type Legacy)(uri ${KIPRJMOD}/kicad_usb_co2-rescue.lib)(options "")(descr ""))
+)
