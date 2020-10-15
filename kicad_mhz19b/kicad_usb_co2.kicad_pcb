@@ -35566,7 +35566,7 @@
   (gr_arc (start 2.54 51.46) (end 0 51.46) (angle -90) (layer Edge.Cuts) (width 0.05) (tstamp 5F27915A))
   (gr_circle (center 2.54 2.54) (end 4.04 2.54) (layer Edge.Cuts) (width 0.05) (tstamp 5F0FA6AE))
   (gr_arc (start 2.54 2.54) (end 2.54 0) (angle -90) (layer Edge.Cuts) (width 0.05))
-  (gr_text "2020 REALGLOBE Inc rev 0.2" (at 33.02 5.08) (layer F.SilkS)
+  (gr_text "2020 REALGLOBE Inc rev 0.1" (at 33.02 5.08) (layer F.SilkS)
     (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
   (gr_circle (center 2.54 51.46) (end 4.04 51.46) (layer Edge.Cuts) (width 0.05) (tstamp 5F0FA6AE))
