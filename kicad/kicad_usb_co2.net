@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /Users/inotatsu/work/usb_series/usb_co2/kicad/kicad_usb_co2.sch)
-    (date "2020 October 28, Wednesday 12:46:29")
+    (date "2020 October 28, Wednesday 12:48:26")
     (tool "Eeschema (5.1.2-1)-1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -63,11 +63,13 @@
       (tstamp 5F3D76FF))
     (comp (ref U4)
       (value PinHeader_XIAO)
+      (footprint kicad_mylib:PinHeader_XIAO)
       (libsource (lib kicad_mylib) (part PinHeader_XIAO) (description ""))
       (sheetpath (names /) (tstamps /))
       (tstamp 5F9B9907))
     (comp (ref U5)
       (value PinHeader_XIAO)
+      (footprint kicad_mylib:PinHeader_XIAO)
       (libsource (lib kicad_mylib) (part PinHeader_XIAO) (description ""))
       (sheetpath (names /) (tstamps /))
       (tstamp 5F9EC865)))
