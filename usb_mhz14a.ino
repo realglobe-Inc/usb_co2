@@ -91,7 +91,7 @@ void usb_mhz14a_abc_off(){
 }
 
 void usb_mhz14a_abc_on(){
-  mySerial.write(command_abc_off, sizeof(command_abc_off));
+  mySerial.write(command_abc_on, sizeof(command_abc_on));
 
   delay(10);
 }
