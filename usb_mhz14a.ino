@@ -67,7 +67,7 @@ int usb_mhz14a_get_co2(){
   delay(10);
 
   int c = 0;
-  int message[9];
+  int message[9] = {0};
 
   while (mySerial.available()) {
     int b = mySerial.read();
