@@ -61,13 +61,14 @@ void usb_mhz14a_init(){
   delay(10);
 }
 
-int usb_mhz14a_get_co2(){
+int usb_mhz14a_get_co2( int *value ){
   mySerial.write(command_get_co2, sizeof(command_get_co2));
 
   delay(10);
 
   int c = 0;
   int message[9] = {0};
+  int ret = 0;
 
   while (mySerial.available()) {
     int b = mySerial.read();
@@ -79,9 +80,9 @@ int usb_mhz14a_get_co2(){
 
   int high_byte = message[2];
   int low_byte = message[3];
-  int value = high_byte * 256 + low_byte;
+  *value = high_byte * 256 + low_byte;
 
-  return value;
+  return ret;
 }
 
 void usb_mhz14a_abc_off(){
@@ -100,7 +101,6 @@ void usb_mhz14a_zero_calibration(){
   int cnt = 0;
 
   for( cnt = 0; cnt < ( CALIB_TIME * 60 ); cnt++){
-    usb_mhz14a_get_co2();
     delay(1000);
   }
 
