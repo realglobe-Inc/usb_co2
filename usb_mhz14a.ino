@@ -1,6 +1,8 @@
 #include <SoftwareSerial.h>
 
 #define CALIB_TIME 30 // per min
+#define RESULT_OK 0
+#define RESULT_NG 1
 
 //SoftwareSerial mySerial(14, 15); // RX, TX for WNPink
 //SoftwareSerial mySerial(16, 10); // RX, TX for ProMicro
@@ -61,11 +63,19 @@ void usb_mhz14a_init(){
   delay(10);
 }
 
-int usb_mhz14a_get_co2( int *value ){
+void usb_mhz14a_co2_request(){
   mySerial.write(command_get_co2, sizeof(command_get_co2));
+}
 
-  delay(10);
+int usb_mhz14a_co2_is_ready(){
+  if( 8 < mySerial.available() ){
+    return RESULT_OK;
+  }
 
+  return RESULT_NG;
+}
+
+int usb_mhz14a_get_co2( int *value ){
   int c = 0;
   int message[9] = {0};
   int ret = 0;
@@ -82,7 +92,11 @@ int usb_mhz14a_get_co2( int *value ){
   int low_byte = message[3];
   *value = high_byte * 256 + low_byte;
 
-  return ret;
+  if( 0 > *value ){
+    return RESULT_NG;
+  }
+
+  return RESULT_OK;
 }
 
 void usb_mhz14a_abc_off(){
