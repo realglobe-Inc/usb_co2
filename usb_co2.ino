@@ -2,7 +2,9 @@
 #define LED_OFF HIGH
 #define PIN_SW1 3
 #define PIN_SW2 2
-#define STATUS_OK 0
+#define INTERVAL_UPDATE 1000
+#define INTERVAL_LOOP 1
+#define SERIAL_TX_MARGIN 13
 
 void setup() {
   digitalWrite(LED_BUILTIN, LED_OFF);
@@ -28,14 +30,27 @@ void setup() {
 
 void loop() {
   int value = 0;
+  int status = 0;
+  static int interval_cnt = INTERVAL_UPDATE;
 
-  value = usb_mhz14a_get_co2();
+  if( 0 >= interval_cnt ){
+    usb_mhz14a_co2_request();
+  }
+  else if( 0 == usb_mhz14a_co2_is_ready() ){
+    status = usb_mhz14a_get_co2( &value );
+    Serial.print("co2=");
+    if( 0 == status ){
+      Serial.print(value, DEC);
+    }
+    Serial.print(";status=");
+    Serial.print(status);
+    Serial.print("\n");
+  }
 
-  Serial.print("co2=");
-  Serial.print(value, DEC);
-  Serial.print(";status=");
-  Serial.print(STATUS_OK);
-  Serial.print("\n");
+  if( 0 >= interval_cnt ){
+    interval_cnt = INTERVAL_UPDATE - SERIAL_TX_MARGIN;
+  }
+  interval_cnt -= INTERVAL_LOOP;
 
-  delay(1000);
+  delay( INTERVAL_LOOP );
 }
