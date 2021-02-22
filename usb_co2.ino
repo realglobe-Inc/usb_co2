@@ -7,6 +7,8 @@
 #define SERIAL_TX_MARGIN 13
 
 void setup() {
+  int dummy = 0;
+
   digitalWrite(LED_BUILTIN, LED_OFF);
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(PIN_SW1, INPUT);
@@ -16,8 +18,10 @@ void setup() {
   while (!Serial) {
     ; // wait for serial port to connect
   }
-
   usb_mhz14a_init();
+  usb_mhz14a_co2_request();
+  delay(100);
+  usb_mhz14a_get_co2( &dummy );
 /*
   if( digitalRead( PIN_SW1 ) ){
     digitalWrite(LED_BUILTIN, LED_ON);
@@ -25,6 +29,7 @@ void setup() {
     digitalWrite(LED_BUILTIN, LED_OFF);
   }
 */
+
   digitalWrite(LED_BUILTIN, LED_ON);
 }
 
