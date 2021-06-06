@@ -6,7 +6,8 @@
 #define INTERVAL_LOOP 1
 #define SERIAL_TX_MARGIN 13
 
-void setup() {
+void setup()
+{
   int dummy = 0;
 
   digitalWrite(LED_BUILTIN, LED_OFF);
@@ -15,14 +16,15 @@ void setup() {
   pinMode(PIN_SW2, INPUT);
 
   Serial.begin(9600);
-  while (!Serial) {
+  while (!Serial)
+  {
     ; // wait for serial port to connect
   }
   usb_mhz14a_init();
   usb_mhz14a_co2_request();
   delay(100);
-  usb_mhz14a_get_co2( &dummy );
-/*
+  usb_mhz14a_get_co2(&dummy);
+  /*
   if( digitalRead( PIN_SW1 ) ){
     digitalWrite(LED_BUILTIN, LED_ON);
     usb_mhz14a_zero_calibration();
@@ -33,18 +35,22 @@ void setup() {
   digitalWrite(LED_BUILTIN, LED_ON);
 }
 
-void loop() {
+void loop()
+{
   int value = 0;
   int status = 0;
   static int interval_cnt = INTERVAL_UPDATE;
 
-  if( 0 >= interval_cnt ){
+  if (0 >= interval_cnt)
+  {
     usb_mhz14a_co2_request();
   }
-  else if( 0 == usb_mhz14a_co2_is_ready() ){
-    status = usb_mhz14a_get_co2( &value );
+  else if (0 == usb_mhz14a_co2_is_ready())
+  {
+    status = usb_mhz14a_get_co2(&value);
     Serial.print("co2=");
-    if( 0 == status ){
+    if (0 == status)
+    {
       Serial.print(value, DEC);
     }
     Serial.print(";status=");
@@ -52,10 +58,11 @@ void loop() {
     Serial.print("\n");
   }
 
-  if( 0 >= interval_cnt ){
+  if (0 >= interval_cnt)
+  {
     interval_cnt = INTERVAL_UPDATE - SERIAL_TX_MARGIN;
   }
   interval_cnt -= INTERVAL_LOOP;
 
-  delay( INTERVAL_LOOP );
+  delay(INTERVAL_LOOP);
 }
