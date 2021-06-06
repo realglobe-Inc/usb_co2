@@ -5,6 +5,7 @@
 #define INTERVAL_UPDATE 1000
 #define INTERVAL_LOOP 1
 #define SERIAL_TX_MARGIN 13
+#define VERSION "1.00"
 
 void setup()
 {
@@ -55,6 +56,8 @@ void loop()
     }
     Serial.print(";status=");
     Serial.print(status);
+    Serial.print(";version=");
+    Serial.print(VERSION);
     Serial.print("\n");
   }
 
