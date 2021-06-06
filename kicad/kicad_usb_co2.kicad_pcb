@@ -2,10 +2,10 @@
 
   (general
     (thickness 1.6)
-    (drawings 17)
+    (drawings 16)
     (tracks 104)
     (zones 0)
-    (modules 9)
+    (modules 10)
     (nets 34)
   )
 
@@ -165,6 +165,19 @@
     (add_net "Net-(U3-Pad4)")
     (add_net "Net-(U3-Pad7)")
     (add_net "Net-(U3-Pad9)")
+  )
+
+  (module kicad_mylib:signature_koino (layer F.Cu) (tedit 60898730) (tstamp 609208D9)
+    (at 6.35 -41.91)
+    (fp_text reference ~ (at 2.54 -3.81) (layer F.SilkS)
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value signature_koino (at 6.35 -5.58) (layer F.Fab)
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text user "Twitter:@koino_mfg  USB-co2" (at 0 -1.27) (layer F.SilkS)
+      (effects (font (size 1 1) (thickness 0.15)) (justify left))
+    )
   )
 
   (module kicad_mylib:MH-Z19B (layer F.Cu) (tedit 6011205E) (tstamp 5FB817B1)
@@ -1368,9 +1381,6 @@
   (gr_arc (start 2.54 -2.53) (end 0 -2.53) (angle -90) (layer Edge.Cuts) (width 0.05) (tstamp 5F27915A))
   (gr_circle (center 3 -44) (end 4.6 -44) (layer Edge.Cuts) (width 0.05) (tstamp 5F0FA6AE))
   (gr_arc (start 2.54 -44.45) (end 2.54 -46.99) (angle -90) (layer Edge.Cuts) (width 0.05))
-  (gr_text "2020 REALGLOBE Inc rev 0.4\n" (at 33.02 -41.91) (layer F.SilkS)
-    (effects (font (size 1.5 1.5) (thickness 0.3)))
-  )
   (gr_circle (center 3 -3) (end 4.6 -3) (layer Edge.Cuts) (width 0.05) (tstamp 5F0FA6AE))
   (gr_circle (center 69 -44) (end 70.6 -44) (layer Edge.Cuts) (width 0.05) (tstamp 5F0FA6AE))
   (gr_circle (center 69 -3) (end 70.6 -3) (layer Edge.Cuts) (width 0.05))
